@@ -12,6 +12,15 @@ type Provider interface {
 }
 ```
 
+Create custom struct tags
+
+```go
+type Config struct {
+	MyEnvVar string `env:"MY_ENV"`
+	MySecret string `secret:"MY_SECRET"`
+}
+```
+
 Pass config providers to `conf.Parse(...)` like so
 
 ```go
