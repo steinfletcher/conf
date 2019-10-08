@@ -1,4 +1,4 @@
-module secrets
+module github.com/steinfletcher/conf
 
 go 1.13
 
