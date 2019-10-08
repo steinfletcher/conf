@@ -8,7 +8,7 @@ import (
 )
 
 type Provider interface {
-	GetValue(field reflect.StructField) (string, error)
+	Value(field reflect.StructField) (string, error)
 }
 
 var DefaultProvider = envProvider{tag: "env"}
@@ -19,7 +19,7 @@ type envProvider struct {
 	tag string
 }
 
-func (o envProvider) GetValue(field reflect.StructField) (string, error) {
+func (o envProvider) Value(field reflect.StructField) (string, error) {
 	var (
 		val string
 		err error

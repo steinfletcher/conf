@@ -147,7 +147,7 @@ func doParse(ref reflect.Value, funcMap map[reflect.Type]ParserFunc, provider Pr
 			continue
 		}
 		refTypeField := refType.Field(i)
-		value, err := provider.GetValue(refTypeField)
+		value, err := provider.Value(refTypeField)
 		if err != nil {
 			return err
 		}
