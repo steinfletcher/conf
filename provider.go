@@ -11,7 +11,7 @@ type Provider interface {
 	Value(field reflect.StructField) (string, error)
 }
 
-var DefaultProvider = envProvider{tag: "env"}
+var EnvProvider = envProvider{tag: "env"}
 
 var SecretEnvProvider = envProvider{tag: "secret"}
 
