@@ -1,5 +1,4 @@
 language: go
 go:
   - 'stable'
-install: make setup
 script: make test
