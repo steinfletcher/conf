@@ -11,9 +11,11 @@ type Provider interface {
 	Provide(field reflect.StructField) (string, error)
 }
 
-var EnvProvider = envProvider{tag: "env"}
-
-var SecretEnvProvider = envProvider{tag: "secret"}
+// nolint: gochecknoglobals
+var (
+	EnvProvider       = envProvider{tag: "env"}
+	SecretEnvProvider = envProvider{tag: "secret"}
+)
 
 type envProvider struct {
 	tag string
