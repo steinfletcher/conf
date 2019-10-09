@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/steinfletcher/conf.svg?branch=master)](https://travis-ci.org/steinfletcher/conf)
+
 # conf
 
 Extends https://github.com/caarlos0/env to support arbitrary data providers. This means you can resolve data from anywhere, such as Vault, AWS Secrets manager, S3 or Google Sheets.
