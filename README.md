@@ -1,6 +1,6 @@
 # conf
 
-Extends https://github.com/caarlos0/env to support arbitrary data providers, e.g. secrets manager tools like Vault or AWS Secrets Manager.
+Extends https://github.com/caarlos0/env to support arbitrary data providers. This means you can resolve data from anywhere, such as Vault, AWS Secrets manager, S3 or Google Sheets.
 
 # Usage
 
