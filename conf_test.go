@@ -144,6 +144,7 @@ type InnerStruct struct {
 type ForNestedStruct struct {
 	NestedStruct
 }
+
 type NestedStruct struct {
 	NestedVar string `env:"nestedvar"`
 }
@@ -415,6 +416,22 @@ func TestParsesEnvInner(t *testing.T) {
 	assert.NoError(t, conf.Parse(&cfg, conf.EnvProvider))
 	assert.Equal(t, "someinnervalue", cfg.InnerStruct.Inner)
 	assert.Equal(t, uint(8), cfg.InnerStruct.Number)
+}
+
+type Parent struct {
+	InnerStruct Inner `env:"MY_SECRETS"`
+}
+
+type Inner struct {
+	Inner string `json:"innervar"`
+}
+
+func TestParsesJsonInner(t *testing.T) {
+	defer os.Clearenv()
+	os.Setenv("MY_SECRETS", `{"innervar": "12345"}`)
+	var cfg Parent
+	assert.NoError(t, conf.Parse(&cfg, conf.EnvProvider))
+	assert.Equal(t, "12345", cfg.InnerStruct.Inner)
 }
 
 func TestParsesEnvInnerFails(t *testing.T) {

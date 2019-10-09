@@ -2,6 +2,7 @@ package conf
 
 import (
 	"encoding"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"net/url"
@@ -172,8 +173,9 @@ func set(field reflect.Value, sf reflect.StructField, value string, funcMap map[
 	}
 
 	var tm = asTextUnmarshaler(field)
+	valBytes := []byte(value)
 	if tm != nil {
-		var err = tm.UnmarshalText([]byte(value))
+		var err = tm.UnmarshalText(valBytes)
 		return newParseError(sf, err)
 	}
 
@@ -206,7 +208,25 @@ func set(field reflect.Value, sf reflect.StructField, value string, funcMap map[
 		return nil
 	}
 
+	if typee.Kind() == reflect.Struct {
+		if json.Valid(valBytes) && isJSONObj(valBytes) {
+			i := reflect.New(typee)
+			newP := i.Interface()
+			err := json.Unmarshal(valBytes, newP)
+			if err != nil {
+				return err
+			}
+			fieldee.Set(reflect.ValueOf(newP).Elem())
+			return nil
+		}
+	}
+
 	return newNoParserError(sf)
+}
+
+func isJSONObj(s []byte) bool {
+	var js map[string]interface{}
+	return json.Unmarshal(s, &js) == nil
 }
 
 func handleSlice(field reflect.Value, value string, sf reflect.StructField, funcMap map[reflect.Type]ParserFunc) error {
