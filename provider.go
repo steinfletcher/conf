@@ -8,7 +8,7 @@ import (
 )
 
 type Provider interface {
-	Value(field reflect.StructField) (string, error)
+	Provide(field reflect.StructField) (string, error)
 }
 
 var EnvProvider = envProvider{tag: "env"}
@@ -19,11 +19,9 @@ type envProvider struct {
 	tag string
 }
 
-func (o envProvider) Value(field reflect.StructField) (string, error) {
-	var (
-		val string
-		err error
-	)
+func (o envProvider) Provide(field reflect.StructField) (string, error) {
+	var val string
+	var err error
 
 	key, opts := parseKeyForOption(field.Tag.Get(o.tag))
 
@@ -60,7 +58,6 @@ func getOr(key, defaultValue string) string {
 	return defaultValue
 }
 
-// split the env tag's key into the expected key and desired option, if any.
 func parseKeyForOption(key string) (string, []string) {
 	opts := strings.Split(key, ",")
 	return opts[0], opts[1:]

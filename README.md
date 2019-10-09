@@ -8,7 +8,7 @@ Implement the config Provider interface
 
 ```go
 type Provider interface {
-	GetValue(field reflect.StructField) (string, error)
+	Provide(field reflect.StructField) (string, error)
 }
 ```
 
