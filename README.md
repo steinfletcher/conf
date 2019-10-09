@@ -16,8 +16,16 @@ Create custom struct tags
 
 ```go
 type Config struct {
-	MyEnvVar string `env:"MY_ENV"`
-	MySecret string `secret:"MY_SECRET"`
+	// github.com/caarlos0/env properties
+	Home         string        `env:"HOME"`
+	Port         int           `env:"PORT" envDefault:"3000"`
+	IsProduction bool          `env:"PRODUCTION"`
+	Hosts        []string      `env:"HOSTS" envSeparator:":"`
+	Duration     time.Duration `env:"DURATION"`
+	TempFolder   string        `env:"TEMP_FOLDER" envDefault:"${HOME}/tmp" envExpand:"true"`
+	
+	// custom properties
+	MySecret     string        `secret:"MY_SECRET,required"`
 }
 ```
 
