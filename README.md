@@ -29,3 +29,7 @@ err := env.Parse(&cfg, env.DefaultProvider, myCustomProvider)
 ```
 
 where `env.DefaultProvider` is the default environment variable parser from `caarlos0/env` and `myCustomProvider` is the custom provider.
+
+# Providers
+
+* [AWS Secrets Manager](https://github.com/steinfletcher/aws-secrets-manager-conf) for resolving secrets from AWS secrets manager.
