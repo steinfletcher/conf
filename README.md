@@ -35,10 +35,10 @@ Pass config providers to `conf.Parse(...)` like so
 
 ```go
 var cfg Config
-err := env.Parse(&cfg, env.DefaultProvider, myCustomProvider)
+err := env.Parse(&cfg, conf.EnvProvider, myCustomProvider)
 ```
 
-where `env.DefaultProvider` is the default environment variable parser from `caarlos0/env` and `myCustomProvider` is the custom provider.
+where `conf.EnvProvider` is the environment variable parser from `caarlos0/env` and `myCustomProvider` is the custom provider.
 
 # Providers
 
