@@ -1029,6 +1029,17 @@ func TestIgnoresUnexported(t *testing.T) {
 	assert.Equal(t, "/tmp/fakehome", cfg.Home2)
 }
 
+func TestMustParse(t *testing.T) {
+	type c struct {
+		A string `env:"A,required"`
+	}
+
+	assert.Panics(t, func() {
+		var config c
+		conf.MustParse(&config, conf.EnvProvider)
+	})
+}
+
 type LogLevel int8
 
 func (l *LogLevel) UnmarshalText(text []byte) error {

@@ -107,6 +107,14 @@ func Parse(v interface{}, providers ...Provider) error {
 	return nil
 }
 
+// MustParse is a helper function to ensure the config is valid and there was no  error when calling the Parse function.
+func MustParse(v interface{}, providers ...Provider) {
+	err := Parse(v, providers...)
+	if err != nil {
+		panic(err)
+	}
+}
+
 // ParseWithFuncs is the same as `Parse` except it also allows the user to pass
 // in custom parsers.
 func ParseWithFuncs(v interface{}, funcMap map[reflect.Type]ParserFunc, provider Provider) error {
